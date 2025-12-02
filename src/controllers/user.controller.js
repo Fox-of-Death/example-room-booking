@@ -62,7 +62,7 @@ exports.getUserById = async (req, res) => {
 // POST /user
 exports.createUser = async (req, res) => {
 
-  const { name, email, password, tel } = req.body;
+  const { name, email, password, tel, role} = req.body;
 
   if (!name) {
     return res.status(400).json({
@@ -76,8 +76,7 @@ exports.createUser = async (req, res) => {
 
   try {
     const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
+      where: { email }});
 
     if (existingUser) {
       return res.status(400).json({
@@ -92,7 +91,7 @@ exports.createUser = async (req, res) => {
         email,
         password,
         tel: tel || null,
-        role: 'user',
+        role: role || 'user',
       },
     });
 
@@ -115,7 +114,7 @@ exports.createUser = async (req, res) => {
 // PUT /user/:id
 exports.updateUser = async (req, res) => {
   const userId = Number(req.params.id);
-  const { name, building, capacity, isActive } = req.body;
+  const { name, email, password, tel, role} = req.body;
   
   if (isNaN(userId)) {
     return res.status(400).json({
@@ -141,8 +140,8 @@ exports.updateUser = async (req, res) => {
         name,
         email,
         password,
-        tel: tel || null,
-        role ,
+        tel: tel ?? null,
+        role: role ?? 'user',
       },
     });
 

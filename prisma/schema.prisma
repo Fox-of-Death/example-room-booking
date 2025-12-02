@@ -30,5 +30,5 @@ model User {
   email String @unique
   password String
   tel String?
-  role String
+  role String 
 }
