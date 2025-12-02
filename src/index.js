@@ -7,12 +7,12 @@ const PORT = process.env.PORT || 3000;
 const roomRoutes = require('./routes/room.route');
 const userRoutes = require('./routes/user.route');
 
-app.use('/users', userRoutes);
+app.use(cors());
 
 app.use(bodyParser.json());
-app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/users', userRoutes);
 app.use('/rooms', roomRoutes);
 
 app.get('/', (req, res) => {

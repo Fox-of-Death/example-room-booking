@@ -61,6 +61,7 @@ exports.getUserById = async (req, res) => {
 
 // POST /user
 exports.createUser = async (req, res) => {
+
   const { name, email, password, tel } = req.body;
 
   if (!name) {
@@ -76,13 +77,13 @@ exports.createUser = async (req, res) => {
   try {
     const existingUser = await prisma.user.findUnique({
       where: { email },
-    })
+    });
 
     if (existingUser) {
       return res.status(400).json({
         status: 'error',
         message: 'Email already exists',
-      })
+      });
     }
 
     const newUser = await prisma.user.create({
@@ -90,8 +91,8 @@ exports.createUser = async (req, res) => {
         name,
         email,
         password,
-        tell: tell || tel,
-        role: 'user', 
+        tel: tel || null,
+        role: 'user',
       },
     });
 
@@ -140,7 +141,7 @@ exports.updateUser = async (req, res) => {
         name,
         email,
         password,
-        tel: tel ?? null,
+        tel: tel || null,
         role ,
       },
     });
