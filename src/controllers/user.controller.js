@@ -114,7 +114,7 @@ exports.createUser = async (req, res) => {
 // PUT /user/:id
 exports.updateUser = async (req, res) => {
   const userId = Number(req.params.id);
-  const { name, building, capacity, isActive } = req.body;
+  const { name, email, password, tel } = req.body;
   
   if (isNaN(userId)) {
     return res.status(400).json({
