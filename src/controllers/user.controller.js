@@ -62,7 +62,7 @@ exports.getUserById = async (req, res) => {
 // POST /user
 exports.createUser = async (req, res) => {
 
-  const { name, email, password, tel, role} = req.body;
+  const { name, email, password, tel, role } = req.body;
 
   if (!name) {
     return res.status(400).json({
@@ -76,7 +76,8 @@ exports.createUser = async (req, res) => {
 
   try {
     const existingUser = await prisma.user.findUnique({
-      where: { email }});
+      where: { email }
+    });
 
     if (existingUser) {
       return res.status(400).json({
@@ -114,8 +115,8 @@ exports.createUser = async (req, res) => {
 // PUT /user/:id
 exports.updateUser = async (req, res) => {
   const userId = Number(req.params.id);
-  const { name, email, password, tel, role} = req.body;
-  
+  const { name, email, password, tel, role } = req.body;
+
   if (isNaN(userId)) {
     return res.status(400).json({
       status: 'error',
@@ -123,12 +124,12 @@ exports.updateUser = async (req, res) => {
     });
   }
 
-  if (!name || typeof capacity !== 'number') {
+  if (!name) {
     return res.status(400).json({
       status: 'error',
       message: 'Invalid request body',
       error: {
-        detail: 'name is required and capacity must be a number',
+        detail: 'name is required',
       },
     });
   }
