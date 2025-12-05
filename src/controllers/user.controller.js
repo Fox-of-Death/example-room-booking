@@ -176,8 +176,8 @@ exports.deleteUser = async (req, res) => {
 
   if (isNaN(userId)) {
     return res.status(400).json({
-      status: 'error',
-      message: 'Invalid user id',
+      status: 'fail',
+      message: 'User not found',
     });
   }
 
@@ -196,7 +196,7 @@ exports.deleteUser = async (req, res) => {
 
     if (error.code === 'P2025') {
       return res.status(404).json({
-        status: 'fail',
+        status: 'error',
         message: 'User not found',
       });
     }
