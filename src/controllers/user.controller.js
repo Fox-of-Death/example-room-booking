@@ -1,6 +1,6 @@
 const prisma = require('../prisma');
 
-// GET /user
+// GET /users
 exports.getUsers = async (req, res) => {
   try {
     // 
@@ -21,7 +21,7 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-// GET /user/:id
+// GET /users/:id
 exports.getUserById = async (req, res) => {
   const userId = parseInt(req.params.id, 10);
 
@@ -59,7 +59,7 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-// POST /user
+// POST /users
 exports.createUser = async (req, res) => {
 
   const { name, email, password, tel, role } = req.body;
@@ -112,7 +112,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// PUT /user/:id
+// PUT /users/:id
 exports.updateUser = async (req, res) => {
   const userId = Number(req.params.id);
   const { name, email, password, tel, role } = req.body;
@@ -170,7 +170,7 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-// DELETE /user/:id
+// DELETE /users/:id
 exports.deleteUser = async (req, res) => {
   const userId = parseInt(req.params.id, 10);
 
